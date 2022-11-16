@@ -1,0 +1,97 @@
+/* Header start */
+
+body {
+    font-family: sans-serif;
+}
+
+.header__nav {
+    position: fixed;
+    top: 0px;
+    right: 0;
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 30px;
+    background-color: #f07427;
+    width: 50%;
+    height: 100%;
+    transition: 0.5s;
+    transform: translateX(100%);
+}
+
+.header__nav-js {
+    transform: translateX(0);
+}
+
+.header__logo {
+    position: relative;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.header__books {
+    color: #f07427;
+}
+
+.header__btn {
+    width: 28px;
+    height: 17px;
+    background-image: url("../icons/burger.svg");
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.header__btn-close{
+    position: absolute;
+    left: 75%;
+    width: 25px;
+    height: 23px;
+    background-image: url("../icons/close.svg");
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.header__link {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Header end */
+
+
+/* Hero start */
+
+.hero {
+    background-color: #f0ead6;
+}
+
+/* Hero end */
+
+
+
+/* Media only screen and ============================  */
+
+@media only screen and (min-width:768px){
+
+    .header__nav {
+        position: static;
+        background-color: transparent;
+        transform: translateX(0);
+        width: max-content;
+        padding-top: 0;
+    }
+
+    .header__link {
+        font-size: 16px;
+        font-weight: 500;
+        color: #6c757d;
+    }
+
+}
