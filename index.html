@@ -47,21 +47,24 @@
   
   <!-- Form start -->
   
-  <section class="hero py-5">
+  <section class="hero py-5 mb-5">
+    
+    <h1 class="visually-hidden ">Hello World</h1>
+    
     <div class="container">
       <form class="form" method="get" autocomplete="off">
         <div class="row mb-5">
-          <div class="col-8 col-md-10">
-            <input class="form-control rounded-pill" type="text" placeholder="Search..." aria-label="Search-books">
+          <div class="col-8 col-md-11">
+            <input class="form__search form-control rounded-pill" type="text" placeholder="Search..." aria-label="Search-books">
           </div>
-          <div class="col-4 col-md-2 d-flex justify-content-end">
-            <button class="btn btn-outline-dark rounded-pill px-4" type="Submit">Find</button>
+          <div class="col-4 col-md-1 d-flex justify-content-end">
+            <button class="btn btn-outline-dark rounded-pill px-lg-4" type="Submit">Find</button>
           </div>
         </div>
         <div class="row">
           <div class="col-12 mb-4  col-md-6 col-lg-3 mb-lg-0">
-            <select class="form-select rounded-pill" aria-label="Default select example">
-              <option selected hidden>Sort by..</option>
+            <select class="form__sort form-select rounded-pill" aria-label="Default select example">
+              <option selected hidden >Sort by..</option>
               <option value="a-z">A-Z</option>
               <option value="z-a">Z-A</option>
               <option value="new-old">New-to-Old</option>
@@ -71,15 +74,15 @@
             </select>
           </div>
           <div class="col-12 mb-4 mb-md-0 col-md-6 col-lg-3">
-            <input type="number" class="form-control rounded-pill" placeholder="Year..">
+            <input type="number" class="form__year form-control rounded-pill" placeholder="Year..">
           </div>
           <div class="col-12 mb-4  col-md-6 col-lg-3 mb-lg-0">
-            <select class="form-select rounded-pill" aria-label="Default select example">
+            <select class="form__author form-select rounded-pill" aria-label="Default select example">
               <option selected value="all">Author</option>
             </select>
           </div>
           <div class="col-12 mb-4 mb-md-0 col-md-6 col-lg-3">
-            <select class="form-select rounded-pill" aria-label="Default select example">
+            <select class="form__language form-select rounded-pill" aria-label="Default select example">
               <option selected value="all">All Language</option>
             </select>
           </div>
@@ -90,10 +93,43 @@
   
   <!-- Form end -->
   
+  <!-- Card start -->
+  
+  <section class="book__card">
+    
+    <h2 class="visually-hidden">Hello World</h2>
+    
+    <div class="container">
+      <div class="book__list row">
+        
+      </div>
+    </div>
+  </section>
+  
+  <!-- Card end -->
   
   
   
   
+  
+  
+  <template class="book__tempate">
+    
+    <div class="book__item col-12 col-md-6 col-lg-4 col-xl-3 mx-auto mb-5 p-3 d-flex flex-column justify-content-between">
+      <img class="book__img-js d-block mx-auto mb-3" width="160px" height="200px" alt="books-images">
+      <div>
+        <h3 class="book__title"></h3>
+        <p class="book__author mb-4"></p>
+      </div>
+      <div class="d-flex justify-content-between mb-4">
+        <span class="book__year d-flex align-items-center"></span>
+        <span class="book__pages d-flex align-items-center"></span>
+        <span class="book__language d-flex align-items-center"></span>
+      </div>
+      <a class="book__link" href="">Wikipidya</a>
+    </div>
+    
+  </template>
   
   
   
