@@ -7,7 +7,7 @@ const books = [
     "link": "https://en.wikipedia.org/wiki/Things_Fall_Apart\n",
     "pages": 209,
     "title": "Things Fall Apart",
-    "year": 1958
+    "year": 1958,
   },
   {
     "author": "Hans Christian Andersen",

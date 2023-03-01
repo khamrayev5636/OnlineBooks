@@ -1,22 +1,7 @@
-const elBtn = document.querySelector(".header__btn");
-const elBody = document.querySelector("body");
-const elClose = document.querySelector(".header__btn-close")
-const elNav = document.querySelector(".header__nav");
-
-elBtn.addEventListener("click" , ()=> {
-    elNav.classList.add("header__nav-js");
-    elBody.classList.add("body-js");
-    
-});
-
-elClose.addEventListener("click" , ()=> {
-    elNav.classList.remove("header__nav-js");
-    elBody.classList.remove("body-js");
-});
+AOS.init();
 
 
 // ================= Form start ======================
-
 const elForm = document.querySelector(".form");
 const elSearch = elForm.querySelector(".form__search");
 const elSort = elForm.querySelector(".form__sort");
@@ -25,10 +10,15 @@ const elAuthor = elForm.querySelector(".form__author");
 const elLanguage = elForm.querySelector(".form__language");
 
 // ================ DOM ga chizish ===================
-
 const elList = document.querySelector(".book__list");
-const elTemp = document.querySelector(".book__tempate").content;
-const elFragment = document.createDocumentFragment();
+const elBtn = document.querySelector(".book__btn");
+
+// Bookmark start
+const booksArr = [];
+const elCloseBtns = document.querySelector(".close__book")
+const elBookmarkList = document.querySelector(".bookmark__list");
+const elBookmarkBtn = document.querySelector(".bookmark__btn");
+const elBookmarkClose = document.querySelector(".close__btn");
 
 
 
@@ -38,13 +28,16 @@ function renderBook(item , regex = ""){
     
     elList.innerHTML = "";
     
+    const elTemp = document.querySelector(".book__tempate").content;
+    const elFragment = document.createDocumentFragment();
+    
     item.forEach(book => {
         
         const elClone = elTemp.cloneNode(true);
         elClone.querySelector(".book__img-js").src = book.imageLink;
         
         if(regex.source != "(?:)" && regex){
-            elClone.querySelector(".book__title").innerHTML = book.title.replace(regex , `<mark class="bg-danger">${regex.source.toLowerCase()}</mark>`);
+            elClone.querySelector(".book__title").innerHTML = book.title.replace(regex , `<mark class="bg-info">${regex.source.toLowerCase()}</mark>`);
         } else {
             elClone.querySelector(".book__title").textContent = book.title;
         }
@@ -54,7 +47,8 @@ function renderBook(item , regex = ""){
         elClone.querySelector(".book__year").textContent = book.year;
         elClone.querySelector(".book__pages").textContent = book.pages;
         elClone.querySelector(".book__language").textContent = book.language;        
-        elClone.querySelector(".book__link").href = book.link;        
+        elClone.querySelector(".book__link").href = book.link;    
+        elClone.querySelector(".book__btn").dataset.bookmarkId = book.pages;   
         
         elFragment.appendChild(elClone);
     });
@@ -64,9 +58,9 @@ function renderBook(item , regex = ""){
 
 // =========== Author sort ========================
 
+const elAuthorArr = [];
 function renderAuthor(name){
     
-    const elAuthorArr = [];
     
     name.forEach(nameAuthor => {
         nameAuthor.author.split(",").forEach(nameList => {
@@ -76,6 +70,8 @@ function renderAuthor(name){
         });
         
     });
+    
+    elAuthorArr.sort()
     
     const elAuthorFrag = new DocumentFragment();
     
@@ -90,11 +86,13 @@ function renderAuthor(name){
     elAuthor.appendChild(elAuthorFrag);
 };
 
+renderAuthor(books);
+
 // ============ Language Sort =====================
 
+const elLang = [];
 function renderLanguage(lang){
     
-    const elLang = [];
     
     lang.forEach(langItem => {
         langItem.language.split(",").forEach(langList => {
@@ -103,6 +101,8 @@ function renderLanguage(lang){
             };
         });
     });
+    
+    elLang.sort()
     
     const elLangFrag = new DocumentFragment();
     
@@ -117,6 +117,8 @@ function renderLanguage(lang){
     
     elLanguage.appendChild(elLangFrag);
 };
+
+renderLanguage(books);
 
 
 // =============== SORT ===========================
@@ -134,8 +136,8 @@ function renderSort(booksort , value){
             };
         });
     }; 
-
-
+    
+    
     if(value == "z-a"){
         booksort.sort((a , b) => {
             if(a.title > b.title){
@@ -147,26 +149,102 @@ function renderSort(booksort , value){
             };
         });
     }; 
-
+    
     if(value == "new-old"){
         booksort.sort((a , b) => b.year - a.year)
     }
-
+    
     if(value == "old-new"){
         booksort.sort((a , b) => a.year - b.year)
     }
-
+    
     if(value == "many-pages"){
         booksort.sort((a , b) => b.pages - a.pages)
     }
-
+    
     if(value == "less-pages"){
         booksort.sort((a , b) => a.pages - b.pages)
     }
     
     
-
+    
 };
+
+
+// Bookmarm function 
+
+function addBookmark(arr , node) {
+    
+    elBookmarkList.innerHTML = ""
+    
+    const elTemp = document.querySelector(".book__tempate").content;
+    const elFragment = document.createDocumentFragment();
+    
+    arr.forEach(book => {
+        
+        const elClone = elTemp.cloneNode(true);
+        
+        elClone.querySelector(".book__img-js").src = book.imageLink;
+        elClone.querySelector(".book__title").textContent = book.title;    
+        elClone.querySelector(".book__author").textContent = book.author;
+        elClone.querySelector(".book__year").textContent = book.year;
+        elClone.querySelector(".book__pages").textContent = book.pages;
+        elClone.querySelector(".book__language").textContent = book.language;        
+        elClone.querySelector(".book__link").href = book.link;
+        elClone.querySelector(".close__book").classList.add("bg-danger")    
+        elClone.querySelector(".book__btn").classList.add("d-none");
+        elClone.querySelector(".close__btn").dataset.bookmarkDelete = book.pages;
+        elClone.querySelector(".close__btn").classList.remove("d-none");
+        
+        elFragment.appendChild(elClone);
+    });
+    
+    node.appendChild(elFragment);
+    
+}
+
+
+// Bookmark start Event Delegation
+
+elList.addEventListener("click" , evt => {
+    
+    if(evt.target.matches(".book__btn")){
+        
+        const addBookmarkId = Number(evt.target.dataset.bookmarkId);
+        const addBookmarkFind = books.find(item => item.pages == addBookmarkId);
+
+        const addColor = evt.target;
+        addColor.classList.add("favorited");
+
+        if(!booksArr.includes(addBookmarkFind)) {
+            
+            booksArr.push(addBookmarkFind);
+            
+            console.log(booksArr);
+            addBookmark(booksArr , elBookmarkList)
+        }
+        
+    }
+    
+});
+
+elBookmarkList.addEventListener("click" , evt => {
+    
+    if(evt.target.matches(".close__btn")) {
+        
+        const deletId = evt.target.dataset.bookmarkDelete;
+        const deletBookmark = booksArr.findIndex(item => item.pages == deletId);
+        
+        booksArr.splice(deletBookmark , 1);
+
+        
+        addBookmark(booksArr , elBookmarkList)
+        
+        const addColor = document.querySelector(".favorited");
+        addColor.classList.remove("favorited")
+    }
+    
+})
 
 
 
@@ -193,6 +271,5 @@ elForm.addEventListener("submit" , (evt) => {
     
 })
 
+
 renderBook(books);
-renderAuthor(books);
-renderLanguage(books);

@@ -19,23 +19,17 @@ body.body-js {
     width: 1px;
 }
 
-.header__nav {
-    position: fixed;
-    top: 0;
-    right: 0;
-    font-size: 20px;
-    font-weight: bold;
-    padding-top: 30px;
-    background-color: #f07427;
-    width: 50%;
-    height: 100%;
-    transition: 0.5s;
-    transform: translateX(100%);
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: #f0ead6;
 }
 
-.header__nav-js {
-    transform: translateX(0);
+::-webkit-scrollbar-thumb {
+    background-color: #f07427;
+    border-radius: 5px;
 }
+
+
 
 .header__logo {
     position: relative;
@@ -51,27 +45,8 @@ body.body-js {
     color: #f07427;
 }
 
-.header__btn {
-    width: 28px;
-    height: 17px;
-    background-image: url("../icons/burger.svg");
-    background-repeat: no-repeat;
-    background-color: transparent;
-    border: none;
-    outline: none;
-}
 
-.header__btn-close{
-    position: absolute;
-    left: 75%;
-    width: 25px;
-    height: 23px;
-    background-image: url("../icons/close.svg");
-    background-repeat: no-repeat;
-    background-color: transparent;
-    border: none;
-    outline: none;
-}
+
 
 .header__link {
     color: #fff;
@@ -96,6 +71,44 @@ body.body-js {
     border: 1px solid #f1cd91;
     border-radius: 10px;
     box-shadow: inset 0 0 10px 0 rgb(255 203 113 / 91%);
+    cursor: pointer;
+}
+
+.book__btn {
+    width: 20px;
+    height: 20px;
+    background-image: url("../images/images/images/pokeStarIconWhite.svg");
+    background-repeat: no-repeat;
+    border: none;
+    background-color: transparent;
+}
+
+.favorited {
+    background-image: url("../images/images/images/pokeStarYellow.svg");
+}
+
+.close__book {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border-radius: 50%;
+}
+
+.close__btn {
+    width: 20px;
+    height: 20px;
+    background-image: url("../images/closeburger.svg");
+    background-repeat: no-repeat;
+    background-size: 10px;
+    background-position: center;
+    background-color: transparent;
+    border: none;
 }
 
 .book__title {
@@ -107,7 +120,6 @@ body.body-js {
     font-size: 22px;
     color: #f07427;
     margin-bottom: 6px;
-    text-transform: capitalize;
 }
 
 .book__author {
@@ -153,10 +165,21 @@ body.body-js {
     font-weight: bold;
 }
 
-.book__list {
-    
-}
 /* Book end */
+
+/* Bookmark start */
+
+.bookmark__btn {
+    position: absolute;
+    right: 0;
+    font-weight: bold;
+    border: 2px solid #f07427;
+    outline: none;
+    background-color: transparent;
+    color: #f07427;
+}
+
+/* Bookmark end */
 
 
 
