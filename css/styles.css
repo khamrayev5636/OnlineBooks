@@ -87,6 +87,7 @@ body.body-js {
     background-image: url("../images/images/images/pokeStarYellow.svg");
 }
 
+
 .close__book {
     position: absolute;
     top: 20px;
@@ -125,6 +126,7 @@ body.body-js {
 .book__author {
     color: #66768E;
 }
+
 
 .book__year::before{
     background-image: url("../icons/year.svg");
